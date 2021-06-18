@@ -12,7 +12,9 @@
 </head>
 <body>
 <div class="container">
-	<h1>ex06 sub02 view<i class="fas fa-cloud-showers-heavy"></i></h1>
+	<h1>ex08 sub01 view</h1>
+	<h3>name : ${name }</h3>
+	<h3>age : ${age }</h3>
 </div>
 </body>
 </html>

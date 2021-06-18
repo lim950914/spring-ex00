@@ -27,4 +27,34 @@ public class Ex06Controller {
 		log.info("ex06, sub02 method");
 		// 굳이 return 타입을 정해주지 않아도 포워딩됨
 	}
+	
+	@RequestMapping("/sub03")
+	public String method03() {
+		log.info("ex06, sub03 method");
+		
+		return "forward:/ex06/sub02"; // 다른 곳에 포워딩 할 시
+	}
+	
+	@RequestMapping("/sub04")
+	public String method04() {
+		log.info("ex06, sub04 method");
+		
+		// response.sendRedirect(request.getContextPath() + "/ex06/sub02");
+		// 위에는 전에 프레임워크 사용 전
+		
+		return "redirect:/ex06/sub02"; // 리다이렉트
+	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+

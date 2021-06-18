@@ -12,7 +12,7 @@
 </head>
 <body>
 <div class="container">
-	<h1>ex06 sub02 view<i class="fas fa-cloud-showers-heavy"></i></h1>
+	<h1>textbook<i class="fas fa-book"></i></h1>
 </div>
 </body>
 </html>

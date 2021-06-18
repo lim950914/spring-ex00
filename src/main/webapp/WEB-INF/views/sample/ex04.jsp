@@ -12,7 +12,8 @@
 </head>
 <body>
 <div class="container">
-	<h1>ex06 sub02 view<i class="fas fa-cloud-showers-heavy"></i></h1>
+	<h2>SAMPLEDTO ${sampleDTO }</h2>
+	<h2>PAGE ${page }</h2>
 </div>
 </body>
 </html>
