@@ -15,7 +15,7 @@ import lombok.extern.log4j.Log4j;
 @Controller
 @RequestMapping("/ex04/*")
 @Log4j
-public class ex04Controller {
+public class Ex04Controller {
 	
 	//http://localhost:8080/controller/ex04/sub01?date=2020-01-01
 	@RequestMapping("/sub01")

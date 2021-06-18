@@ -11,7 +11,7 @@ import lombok.extern.log4j.Log4j;
 @Controller
 @Log4j
 @RequestMapping("/ex05")
-public class ex05Controller {
+public class Ex05Controller {
 	
 	@RequestMapping("/sub01")
 	public void method01(@DateTimeFormat(pattern = "yyyy-MM-DD") Date date) {
