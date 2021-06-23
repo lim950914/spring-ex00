@@ -7,6 +7,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.zerock.domain.BoardVO;
 import org.zerock.service.BoardService;
@@ -47,6 +48,49 @@ public class BoardController {
 		rttr.addFlashAttribute("result", board.getBno());
 		
 		// /board/list redirect
+		return "redirect:/board/list";
+	}
+	
+	@GetMapping("/get")
+	public void get(@RequestParam("bno") Long bno, Model model ) {
+		
+		// service에게 일 시킴
+		BoardVO vo = service.get(bno);
+		
+		// 결과를 모델에 넣음
+		model.addAttribute("board", vo);
+		
+		// forward
+	}
+	
+	@PostMapping("/modify")
+	public String modify(BoardVO board, RedirectAttributes rttr) {
+		// request parameter 수집
+		
+		// service 일 시킴
+		boolean success = service.modify(board);
+		
+		// 결과를 모델 (또는 FlashMap)에 넣고
+		if (success) {
+			rttr.addFlashAttribute("result", "success");
+		}
+		
+		// forward or redirect
+		return "redirect:/board/list";
+	}
+	
+	@PostMapping("/remove")
+	public String remove(@RequestParam("bno") Long bno, RedirectAttributes rttr) {
+		// parameter 수집
+		
+		// service 일
+		boolean success = service.remove(bno);
+		// 결과 담고
+		if (success) {
+			rttr.addFlashAttribute("result", "success");
+		}
+		
+		// forward or redirect
 		return "redirect:/board/list";
 	}
 }
