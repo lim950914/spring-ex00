@@ -46,12 +46,14 @@ public class BoardController {
 		
 		// redirect 목적지로 정보 전달
 		rttr.addFlashAttribute("result", board.getBno());
+		rttr.addFlashAttribute("messageTitle", "등록 성공");
+		rttr.addFlashAttribute("messageBody", board.getBno() + "번 게시물 등록 되었습니다");
 		
 		// /board/list redirect
 		return "redirect:/board/list";
 	}
 	
-	@GetMapping("/get")
+	@GetMapping({"/get","/modify"})
 	public void get(@RequestParam("bno") Long bno, Model model ) {
 		
 		// service에게 일 시킴
@@ -73,6 +75,8 @@ public class BoardController {
 		// 결과를 모델 (또는 FlashMap)에 넣고
 		if (success) {
 			rttr.addFlashAttribute("result", "success");
+			rttr.addFlashAttribute("messageTitle", "수정 성공");
+			rttr.addFlashAttribute("messageBody", "수정 되었습니다");
 		}
 		
 		// forward or redirect
@@ -88,10 +92,17 @@ public class BoardController {
 		// 결과 담고
 		if (success) {
 			rttr.addFlashAttribute("result", "success");
+			rttr.addFlashAttribute("messageTitle", "삭제 성공");
+			rttr.addFlashAttribute("messageBody", "삭제 되었습니다");
 		}
 		
 		// forward or redirect
 		return "redirect:/board/list";
+	}
+	
+	@GetMapping("/register")
+	public void register() {
+		// forward / WEB-INF/views/board/register.jsp
 	}
 }
 
