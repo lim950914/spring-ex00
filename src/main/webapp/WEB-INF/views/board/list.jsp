@@ -11,6 +11,27 @@
 <%@ include file="/WEB-INF/subModules/bootstrapHeader.jsp" %>
 
 <title>Insert title here</title>
+
+<script>
+$(document).ready(function () {
+	$("#list-pagenation1 a").click(function (e) {
+		// 기본 액션 중지 (hyperlink 역할 안함)
+		e.preventDefault();
+		
+		console.log("a요소 클릭됨");
+		
+		var actionForm = $("#actionForm");
+		
+		// form의 pageNum input의 값을 a 요소의 href값으로 변경
+		actionForm.find("[name=pageNum]").val($(this).attr("href"));
+		
+		// submit
+		actionForm.submit();
+		
+	});
+});
+</script>
+
 </head>
 <body>
 <bd:navbar />
@@ -32,8 +53,15 @@
 				<tr>
 					<td>${board.bno }</td>
 					<td>
-						<a href="${appRoot }/board/get?bno=${board.bno}">
-						${board.title }
+					
+					<c:url value="/board/get" var="getUrl">
+						<c:param name="bno" value="${board.bno }" />
+						<c:param name="pageNum" value="${pageMaker.cri.pageNum }" />
+						<c:param name="amount" value="${pageMaker.cri.amount }" />
+					</c:url>
+					
+						<a href="${getUrl }">
+							${board.title }
 						</a>
 					</td>
 					<td>${board.writer }</td>
@@ -49,29 +77,36 @@
 	</table>
 </div>
 
-<!-- pagination -->
-
+<!--  pagenation -->
 <div>
-	<nav aria-label="Page navigation example">
-	  <ul class="pagination justify-content-center">
-	    <li class="page-item disabled">
-	      <a class="page-link" href="#" tabindex="-1" aria-disabled="true">&laquo;</a>
-	    </li>
-	    <li class="page-item"><a class="page-link" href="#">11</a></li>
-	    <li class="page-item"><a class="page-link" href="#">12</a></li>
-	    <li class="page-item"><a class="page-link" href="#">13</a></li>
-	    <li class="page-item"><a class="page-link" href="#">14</a></li>
-	    <li class="page-item"><a class="page-link" href="#">15</a></li>
-	    <li class="page-item"><a class="page-link" href="#">16</a></li>
-	    <li class="page-item"><a class="page-link" href="#">17</a></li>
-	    <li class="page-item"><a class="page-link" href="#">18</a></li>
-	    <li class="page-item"><a class="page-link" href="#">19</a></li>
-	    <li class="page-item"><a class="page-link" href="#">20</a></li>
+<nav aria-label="Page navigation example">
+  <ul id="list-pagenation1" class="pagination justify-content-center">
+  
+  	<c:if test="${pageMaker.prev }">
 	    <li class="page-item">
-	      <a class="page-link" href="#">&raquo;</a>
+	      <a class="page-link" href="${pageMaker.startPage - 1 }">Previous</a>
 	    </li>
-	  </ul>
-	</nav>
+  	</c:if>
+	
+	<c:forEach begin="${pageMaker.startPage }" end="${pageMaker.endPage }" var="num">
+	    <li class="page-item"><a class="page-link" href="${num }">${num }</a></li>
+	</c:forEach>
+
+	<c:if test="${pageMaker.next }">
+	    <li class="page-item">
+	      <a class="page-link" href="${pageMaker.endPage + 1 }">Next</a>
+	    </li>
+	</c:if>
+  </ul>
+</nav>
+
+<div style="display: none;">
+	<form id="actionForm" action="${appRoot }/board/list" method="get">
+		<input name="pageNum" value="${pageMaker.cri.pageNum }" />
+		<input name="amount" value="${pageMaker.cri.amount }" />
+	</form>
+</div>
+
 </div>
 
 <c:if test="${not empty result }" >

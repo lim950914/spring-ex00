@@ -24,4 +24,5 @@ public class Criteria {
 	public int getFrom() {
 		return amount * (pageNum - 1);
 	}
+	
 }
