@@ -49,8 +49,10 @@ $(document).ready(function() {
 				
 				<input hidden name="pageNum" value="${cri.pageNum }"/>
 				<input hidden name="amount" value="${cri.amount }"/>
-				<input class="btn btn-dark" type="submit" value="수정" />
-				<input id="board-remove-btn1" class="btn btn-dark" type="button" value="삭제" />
+				<input hidden name="type" value="${cri.type }" />
+				<input hidden name="keyword" value="${cri.keyword }" />	
+				<input class="btn btn-primary" type="submit" value="수정" />
+				<input id="board-remove-btn1" class="btn btn-primary" type="button" value="삭제" />
 			</form>
 		</div>
 	</div>

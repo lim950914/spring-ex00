@@ -32,7 +32,7 @@
 					<label for="input2">작성자</label>
 					<input id="input2" class="form-control" name="writer">
 				</div>
-				<input class="btn btn-dark" type="submit" value="작성" />
+				<input class="btn btn-primary" type="submit" value="작성" />
 			</form>
 		</div>
 	</div>
