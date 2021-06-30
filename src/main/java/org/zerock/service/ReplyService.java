@@ -16,3 +16,4 @@ public interface ReplyService {
 	
 	public List<ReplyVO> getList(Long bno);
 }
+
