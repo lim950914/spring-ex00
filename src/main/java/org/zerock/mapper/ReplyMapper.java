@@ -19,3 +19,4 @@ public interface ReplyMapper {
 	public List<ReplyVO> getList(Long bno);
 }
 
+
