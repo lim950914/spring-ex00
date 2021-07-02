@@ -85,8 +85,25 @@ public class ReplyMapperTests {
 		
 		
 	}
+	
+	@Test
+	public void testDeleteByBno() {
+		Long bno = 96L;
+		
+		mapper.deleteByBno(bno);
+	}
 
 }
+
+
+
+
+
+
+
+
+
+
 
 
 

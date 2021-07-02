@@ -98,7 +98,7 @@ var boardBno = "${board.bno}";
         </form>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
         <button id="reply-insert-btn1" type="button" class="btn btn-primary">댓글 입력</button>
       </div>
     </div>
