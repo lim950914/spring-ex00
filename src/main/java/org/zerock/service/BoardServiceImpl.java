@@ -1,16 +1,24 @@
 package org.zerock.service;
 
-import java.util.List; 
+import java.io.InputStream;
+import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 import org.zerock.domain.BoardVO;
 import org.zerock.domain.Criteria;
+import org.zerock.domain.FileVO;
 import org.zerock.mapper.BoardMapper;
+import org.zerock.mapper.FileMapper;
 import org.zerock.mapper.ReplyMapper;
 
 import lombok.AllArgsConstructor;
+import software.amazon.awssdk.auth.credentials.ProfileCredentialsProvider;
+import software.amazon.awssdk.core.sync.RequestBody;
+import software.amazon.awssdk.services.s3.S3Client;
+import software.amazon.awssdk.services.s3.model.ObjectCannedACL;
+import software.amazon.awssdk.services.s3.model.PutObjectRequest;
 
 @AllArgsConstructor // 생성자 생성
 @Service // Component
@@ -18,6 +26,7 @@ public class BoardServiceImpl implements BoardService {
 	
 	private BoardMapper mapper;
 	private ReplyMapper replyMapper;
+	private FileMapper fileMapper;
 	
 //	@Autowired
 //	public BoardServiceImpl(BoardMapper mapper) {
@@ -27,6 +36,45 @@ public class BoardServiceImpl implements BoardService {
 	@Override
 	public void register(BoardVO board) {
 		mapper.insertSelectKey(board);
+	}
+	
+	@Override
+	@Transactional
+	public void register(BoardVO board, MultipartFile file) {
+		register(board);
+		
+		if (file != null && file.getSize() > 0) {
+			FileVO vo = new FileVO();
+			vo.setBno(board.getBno());
+			vo.setFileName(file.getOriginalFilename());
+			
+			fileMapper.insert(vo);
+			upload(board, file);
+		}
+	}
+	
+	private void upload(BoardVO board, MultipartFile file) {
+		
+		try(InputStream is = file.getInputStream()) {
+			String bucketName = "choongang-lim950914";
+			String profileName = "spring1";
+			S3Client s3 = S3Client.builder()
+					.credentialsProvider(ProfileCredentialsProvider.create(profileName))
+					.build();
+			
+			PutObjectRequest objectRequest = PutObjectRequest.builder()
+					.bucket(bucketName)
+					.key(board.getBno() + "/" + file.getOriginalFilename())
+					.contentType(file.getContentType())
+					.acl(ObjectCannedACL.PUBLIC_READ)
+					.build();
+			
+			s3.putObject(objectRequest, 
+					RequestBody.fromInputStream(file.getInputStream(), file.getSize()));
+			
+			} catch (Exception e) {
+				throw new RuntimeException(e);
+			}
 	}
 
 	@Override
