@@ -6,21 +6,11 @@
 <mapper namespace="org.zerock.mapper.FileMapper">
 
 <insert id="insert" useGeneratedKeys="true" keyProperty="id" keyColumn="id">
-	INSERT INTO tbl_board_file (bno, fileName)
-	VALUES (#{bno}, #{fileName})
+INSERT INTO tbl_board_file (bno, fileName)
+VALUES (#{bno}, #{fileName})
 </insert>
 
 </mapper>
-
-
-
-
-
-
-
-
-
-
 
 
 

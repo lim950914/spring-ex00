@@ -54,9 +54,9 @@ public class BoardServiceImpl implements BoardService {
 	}
 	
 	private void upload(BoardVO board, MultipartFile file) {
-		
-		try(InputStream is = file.getInputStream()) {
-			String bucketName = "choongang-lim950914";
+
+		try (InputStream is = file.getInputStream()) {
+			String bucketName = "choongang-sebaek1";
 			String profileName = "spring1";
 			S3Client s3 = S3Client.builder()
 					.credentialsProvider(ProfileCredentialsProvider.create(profileName))
@@ -70,11 +70,12 @@ public class BoardServiceImpl implements BoardService {
 					.build();
 			
 			s3.putObject(objectRequest, 
-					RequestBody.fromInputStream(file.getInputStream(), file.getSize()));
+					RequestBody.fromInputStream(is, file.getSize()));
 			
-			} catch (Exception e) {
-				throw new RuntimeException(e);
-			}
+		} catch (Exception e) {
+			throw new RuntimeException(e);
+		}
+		
 	}
 
 	@Override
