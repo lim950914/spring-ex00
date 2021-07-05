@@ -24,4 +24,6 @@ public interface BoardService {
 
 	public void register(BoardVO board, MultipartFile file);
 
+	public boolean modify(BoardVO board, MultipartFile file);
+
 }
