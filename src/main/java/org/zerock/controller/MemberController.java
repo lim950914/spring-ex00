@@ -9,7 +9,7 @@ import lombok.extern.log4j.Log4j;
 @RequestMapping("/member")
 @Log4j
 public class MemberController {
-	
+
 	@RequestMapping("/login")
 	public void login() {
 		
