@@ -2,6 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="bd" tagdir="/WEB-INF/tags/board" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 
 <!DOCTYPE html>
 <html>
@@ -70,9 +71,10 @@ var boardBno = "${board.bno}";
 	<div class="row">
 		<div class="col-12">
 			<h3>댓글</h3>
-			<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#reply-insert-modal">댓글 작성</button>
+			<sec:authorize access="isAuthenticated()">
+				<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#reply-insert-modal">댓글 작성</button>
+			</sec:authorize>
 			<ul id="reply-list-container" class="list-unstyled">
-				
 			</ul>
 		</div>
 	</div>
@@ -114,6 +116,7 @@ var boardBno = "${board.bno}";
 </div>
 
 <%-- 댓글 수정, 삭제 모달 --%>
+
 <div class="modal fade" id="reply-modify-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
