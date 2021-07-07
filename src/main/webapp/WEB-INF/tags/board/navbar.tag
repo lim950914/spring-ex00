@@ -79,11 +79,6 @@
   
 </nav>
 
-<%-- spring security test --%>
-<div>
-	<sec:authentication property="principal"/>
-</div>
-
 
 
 
