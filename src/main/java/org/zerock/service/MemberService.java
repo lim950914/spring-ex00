@@ -13,3 +13,4 @@ public interface MemberService {
 	boolean remove(MemberVO vo);
 
 }
+

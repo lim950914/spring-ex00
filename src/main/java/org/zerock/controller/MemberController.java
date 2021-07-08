@@ -83,26 +83,10 @@ public class MemberController {
 		boolean ok = service.remove(vo);
 		
 		if (ok) {
-			return "member/remove";
+			return "redirect:member/remove";
 		} else {
 			rttr.addAttribute("status", "error");
 			return "redirect:/member/info";
 		}
 	}
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

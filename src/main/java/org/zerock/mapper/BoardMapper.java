@@ -40,3 +40,5 @@ public interface BoardMapper {
 	public void removByUserid(MemberVO vo);
 
 }
+
+
