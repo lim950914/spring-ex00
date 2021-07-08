@@ -6,7 +6,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.zerock.domain.AuthVO;
 import org.zerock.domain.MemberVO;
+import org.zerock.mapper.BoardMapper;
+import org.zerock.mapper.FileMapper;
 import org.zerock.mapper.MemberMapper;
+import org.zerock.mapper.ReplyMapper;
 
 import lombok.Setter;
 
@@ -15,6 +18,15 @@ public class MemberServiceImpl implements MemberService {
 	
 	@Setter(onMethod_ = @Autowired)
 	private MemberMapper mapper;
+	
+	@Setter(onMethod_ = @Autowired)
+	private ReplyMapper replyMapper;
+	
+	@Setter(onMethod_ = @Autowired)
+	private BoardMapper boardMapper;
+	
+	@Setter(onMethod_ = @Autowired)
+	private FileMapper fileMapper;
 	
 	@Setter(onMethod_ = @Autowired)
 	private PasswordEncoder encoder;
@@ -40,6 +52,37 @@ public class MemberServiceImpl implements MemberService {
 	public MemberVO read(String name) {
 		
 		return mapper.read(name);
+	}
+	
+	@Override
+	public boolean modify(MemberVO vo) {
+		
+		vo.setUserpw(encoder.encode(vo.getUserpw()));
+		
+		int cnt = mapper.update(vo);
+		
+		return cnt == 1;
+	}
+
+	@Override
+	@Transactional
+	public boolean remove(MemberVO vo) {
+		
+		// tbl_reply 삭제
+		replyMapper.removByUserid(vo);
+		
+		// tbl_board_file 삭제
+		fileMapper.removByUserid(vo);
+		
+		// tbl_board 삭제
+		boardMapper.removByUserid(vo);
+		
+		// tbl_member_auth 삭제
+		mapper.removeAuth(vo);
+		
+		// tbl_member 삭제
+		int cnt = mapper.remove(vo);
+		return cnt == 1;
 	}
 	
 }

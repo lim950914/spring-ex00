@@ -114,6 +114,11 @@
   
   </update>
   
+  <delete id="removByUserid">
+	DELETE FROM tbl_board
+	WHERE writer = #{userid}
+</delete>
+
 </mapper>
 
 
