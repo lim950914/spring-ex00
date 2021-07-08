@@ -75,21 +75,3 @@ public class SampleRestController {
 		return result;
 	}
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

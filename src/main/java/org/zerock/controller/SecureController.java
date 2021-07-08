@@ -37,19 +37,3 @@ public class SecureController {
 		return "어드민만 접근 가능 경로";
 	}
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

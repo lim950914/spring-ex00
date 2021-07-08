@@ -140,17 +140,3 @@ public class BoardController {
 	}
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-

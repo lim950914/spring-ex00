@@ -8,3 +8,4 @@ public class FileVO {
 	private Long bno;
 	private String fileName;
 }
+

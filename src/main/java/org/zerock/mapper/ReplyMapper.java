@@ -25,5 +25,3 @@ public interface ReplyMapper {
 
 	public void removByUserid(MemberVO vo);
 }
-
-

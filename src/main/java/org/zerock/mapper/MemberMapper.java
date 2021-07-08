@@ -17,3 +17,4 @@ public interface MemberMapper {
 	
 	public int removeAuth(MemberVO vo);
 }
+

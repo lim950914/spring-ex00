@@ -27,3 +27,4 @@ public interface BoardService {
 	public boolean modify(BoardVO board, MultipartFile file);
 
 }
+

@@ -16,5 +16,3 @@ public class ReplyVO {
 	
 	private String replyerName;
 }
-
-
