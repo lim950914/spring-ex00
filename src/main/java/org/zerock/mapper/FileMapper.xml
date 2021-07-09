@@ -5,7 +5,7 @@
   
 <mapper namespace="org.zerock.mapper.FileMapper">
 
-<delete id="removByUserid">
+<delete id="removeByUserid">
 DELETE FROM tbl_board_file
 WHERE bno IN (
 	SELECT bno FROM tbl_board

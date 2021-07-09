@@ -114,7 +114,7 @@
   
   </update>
   
-  <delete id="removByUserid">
+  <delete id="removeByUserid">
 	DELETE FROM tbl_board
 	WHERE writer = #{userid}
 </delete>

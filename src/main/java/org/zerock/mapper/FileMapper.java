@@ -9,5 +9,5 @@ public interface FileMapper {
 
 	public void deleteByBno(Long bno);
 
-	public void removByUserid(MemberVO vo);
+	public void removeByUserid(MemberVO vo);
 }

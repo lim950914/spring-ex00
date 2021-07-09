@@ -6,7 +6,7 @@ import org.zerock.domain.MemberVO;
 import org.zerock.domain.ReplyVO;
 
 public interface ReplyMapper {
-	
+
 	public int insert(ReplyVO vo);
 	
 	public int insertSelectKey(ReplyVO vo);
@@ -23,5 +23,16 @@ public interface ReplyMapper {
 	
 	public int deleteByBno(Long bno);
 
-	public void removByUserid(MemberVO vo);
+	public void removeByUserid(MemberVO vo);
+
+	public void removeByBnoByUserid(MemberVO vo);
 }
+
+
+
+
+
+
+
+
+

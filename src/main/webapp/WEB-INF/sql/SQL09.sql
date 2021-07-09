@@ -28,9 +28,9 @@ ADD FOREIGN KEY (writer) REFERENCES tbl_member(userid);
 ALTER TABLE tbl_reply
 ADD FOREIGN KEY (replyer) REFERENCES tbl_member(userid);
 
+SELECT * FROM tbl_member;
 
-
-
+DELETE FROM tbl_member WHERE userid = '';
 
 
 

@@ -30,6 +30,8 @@ public class MemberServiceImpl implements MemberService {
 	
 	@Setter(onMethod_ = @Autowired)
 	private PasswordEncoder encoder;
+	
+	
 
 	@Override
 	@Transactional
@@ -47,13 +49,24 @@ public class MemberServiceImpl implements MemberService {
 		
 		return cnt == 1;
 	}
-	
+
 	@Override
 	public MemberVO read(String name) {
-		
+
 		return mapper.read(name);
 	}
 	
+	@Override
+	public boolean modify(MemberVO vo, String oldPassword) {
+		MemberVO old = mapper.read(vo.getUserid());
+		
+		if (encoder.matches(oldPassword, old.getUserpw())) {
+			return modify(vo);
+		}
+		
+		return false;
+	}
+
 	@Override
 	public boolean modify(MemberVO vo) {
 		
@@ -63,19 +76,31 @@ public class MemberServiceImpl implements MemberService {
 		
 		return cnt == 1;
 	}
-
+	@Override
+	public boolean remove(MemberVO vo, String oldPassword) {
+		MemberVO old = mapper.read(vo.getUserid());
+		if (encoder.matches(oldPassword, old.getUserpw())) {
+			return remove(vo);
+		}
+		
+		return false;
+	}
+	
 	@Override
 	@Transactional
 	public boolean remove(MemberVO vo) {
 		
 		// tbl_reply 삭제
-		replyMapper.removByUserid(vo);
+		replyMapper.removeByUserid(vo);
+		
+		// 본인 게시물의 다른 사람 댓글 삭제
+		replyMapper.removeByBnoByUserid(vo);
 		
 		// tbl_board_file 삭제
-		fileMapper.removByUserid(vo);
+		fileMapper.removeByUserid(vo);
 		
 		// tbl_board 삭제
-		boardMapper.removByUserid(vo);
+		boardMapper.removeByUserid(vo);
 		
 		// tbl_member_auth 삭제
 		mapper.removeAuth(vo);
@@ -84,7 +109,19 @@ public class MemberServiceImpl implements MemberService {
 		int cnt = mapper.remove(vo);
 		return cnt == 1;
 	}
-	
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 

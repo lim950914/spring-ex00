@@ -37,7 +37,7 @@ public interface BoardMapper {
 
 	public int getTotalCount(Criteria cri);
 
-	public void removByUserid(MemberVO vo);
+	public void removeByUserid(MemberVO vo);
 
 }
 
